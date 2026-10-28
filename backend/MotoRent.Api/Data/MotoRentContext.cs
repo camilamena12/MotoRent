@@ -15,6 +15,9 @@ public class MotoRentContext : DbContext
     //guardar clientes 
     public DbSet<Cliente> Clientes { get; set; }
 
+    public DbSet<Alquiler> Alquileres { get; set; }
+    //guarda los pagos
+    public DbSet<Pago> Pagos { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

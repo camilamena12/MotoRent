@@ -40,6 +40,9 @@ namespace MotoRent.Api.Migrations
                     b.Property<DateTime?>("FechaDevolucion")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaHabilitacionCompra")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
 

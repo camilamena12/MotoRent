@@ -20,6 +20,7 @@ public class Alquiler
     public decimal PrecioPorDia { get; set; }
 
     public bool OpcionCompra { get; set; } = false;
+    public DateTime? FechaHabilitacionCompra { get; set; }
 
     public string Estado { get; set; } = "Activo";
 }

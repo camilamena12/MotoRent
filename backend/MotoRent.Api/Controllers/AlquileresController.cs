@@ -77,6 +77,16 @@ public class AlquileresController : ControllerBase
         alquiler.FechaDevolucion = null;
         alquiler.PrecioPorDia = moto.PrecioPorDia;
         alquiler.Estado = "Activo";
+        //calcular fecha de compra
+        if (alquiler.OpcionCompra)
+        {
+            alquiler.FechaHabilitacionCompra =
+                alquiler.FechaInicio.AddMonths(6);
+        }
+        else
+        {
+            alquiler.FechaHabilitacionCompra = null;
+        }
 
         _context.Alquileres.Add(alquiler);
         moto.Disponible = false;
@@ -117,6 +127,43 @@ public class AlquileresController : ControllerBase
         return Ok(alquiler);
     }
 
+    // consulta si un alquiler ya esta habilitado para ejercer a opcion de compra 
+
+    [HttpGet("{id}/opcion-compra")]
+    public async Task<IActionResult> ConsultarOpcionCompra(int id)
+    {
+        var alquiler = await _context.Alquileres
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+        if (alquiler == null)
+        {
+            return NotFound("El alquiler no existe.");
+        }
+
+        if (!alquiler.OpcionCompra)
+        {
+            return Ok(new
+            {
+                TieneOpcionCompra = false,
+                Habilitada = false,
+                Mensaje = "Este alquiler no tiene opción de compra."
+            });
+        }
+
+        var habilitada =
+            alquiler.FechaHabilitacionCompra.HasValue &&
+            DateTime.Today >= alquiler.FechaHabilitacionCompra.Value.Date;
+
+        return Ok(new
+        {
+            TieneOpcionCompra = true,
+            Habilitada = habilitada,
+            FechaHabilitacionCompra = alquiler.FechaHabilitacionCompra,
+            Mensaje = habilitada
+                ? "La opción de compra ya está habilitada."
+                : "La opción de compra todavía no está habilitada."
+        });
+    }
 
 
 

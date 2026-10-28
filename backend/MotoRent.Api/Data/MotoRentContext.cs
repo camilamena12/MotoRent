@@ -12,6 +12,8 @@ public class MotoRentContext : DbContext
     }
 
     public DbSet<Moto> Motos { get; set; }
+    //guardar clientes 
+    public DbSet<Cliente> Clientes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

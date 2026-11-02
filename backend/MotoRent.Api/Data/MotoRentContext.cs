@@ -25,5 +25,13 @@ public class MotoRentContext : DbContext
         modelBuilder.Entity<Moto>()
             .Property(m => m.PrecioPorDia)
             .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Alquiler>()
+            .Property(a => a.PrecioPorDia)
+            .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Pago>()
+            .Property(p => p.Importe)
+            .HasPrecision(18, 2);
     }
 }

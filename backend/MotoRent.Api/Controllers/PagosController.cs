@@ -85,6 +85,8 @@ public class PagosController : ControllerBase
 
         pago.FechaPago = DateTime.Now;
         pago.DiaAlquilado = pago.DiaAlquilado.Date;
+        pago.Estado = "Pendiente";
+        pago.ReferenciaExterna = null;
 
         _context.Pagos.Add(pago);
         await _context.SaveChangesAsync();

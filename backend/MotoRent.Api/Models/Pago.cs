@@ -1,5 +1,4 @@
-﻿
-namespace MotoRent.Api.Models;
+﻿namespace MotoRent.Api.Models;
 
 public class Pago
 {
@@ -16,4 +15,8 @@ public class Pago
     public decimal Importe { get; set; }
 
     public string MetodoPago { get; set; } = "Efectivo";
+
+    public string Estado { get; set; } = "Pendiente";
+
+    public string? ReferenciaExterna { get; set; }
 }

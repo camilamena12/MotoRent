@@ -53,6 +53,7 @@ namespace MotoRent.Api.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("PrecioPorDia")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -142,14 +143,22 @@ namespace MotoRent.Api.Migrations
                     b.Property<DateTime>("DiaAlquilado")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("FechaPago")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Importe")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("MetodoPago")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReferenciaExterna")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

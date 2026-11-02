@@ -1,5 +1,21 @@
+# Visual Studio
 .vs/
+*.csproj.user
+
+# .NET
 **/bin/
 **/obj/
 
-*.csproj.user
+# React / Node
+**/node_modules/
+**/dist/
+**/.vite/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

@@ -139,6 +139,9 @@ useEffect(() => {
               ${Number(moto.precioPorDia).toLocaleString('es-AR')} por día
             </h5>
             <span className="badge bg-success">Disponible</span>
+            <Link to="/solicitar-alquiler" state={{ moto }} className="btn btn-danger w-100 mt-3">
+              Solicitar alquiler</Link>
+        
           </div>
         </div>
       </div>

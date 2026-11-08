@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MotoRent.Api.Data;
 using MotoRent.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MotoRent.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Administrador")]
+
 public class ClientesController : ControllerBase
 {
     private readonly MotoRentContext _context;
@@ -27,6 +30,7 @@ public class ClientesController : ControllerBase
 
     //modificar cliente
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> ActualizarCliente(int id, Cliente clienteActualizado)
     {
         var cliente = await _context.Clientes.FindAsync(id);

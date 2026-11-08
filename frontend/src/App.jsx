@@ -3,25 +3,40 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Home from './pages/Home';
 import AdminDashboard from './AdminDashboard';
+import SolicitudAlquiler from './pages/SolicitudAlquiler';
+import ClienteDashboard from './pages/ClienteDashboard';
+import Login from './pages/Login';
+import RutaProtegida from './components/RutaProtegida';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+       <Route path="/admin"  element={  <RutaProtegida rolPermitido="Administrador">
+      <AdminDashboard />
+       </RutaProtegida>
+  }
+/>
+
+        <Route path="/login" element={<Login />} />
 
         <Route
-          path="/login"
-          element={<h2 className="text-center mt-5">Inicio de sesión: próximamente</h2>}
+  path="/cliente"
+  element={
+    <RutaProtegida rolPermitido="Cliente">
+      <ClienteDashboard />
+    </RutaProtegida>
+  }
+/>
+
+        <Route path="*" element={<Navigate to="/" replace />}
         />
 
-        <Route
-          path="/cliente"
-          element={<h2 className="text-center mt-5">Panel del cliente: próximamente</h2>}
+        <Route path="/solicitar-alquiler" element={<SolicitudAlquiler />}
         />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );

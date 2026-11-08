@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MotoRent.Api.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MotoRent.Api.Controllers;
 
@@ -25,6 +26,8 @@ public class MotosController : ControllerBase
     }
     //este metodo recibe los datos de una moto y las guarda en sql y devuelve la moto registrada
     [HttpPost]
+    [HttpPost]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> CrearMoto(MotoRent.Api.Models.Moto moto)
     {
         _context.Motos.Add(moto);
@@ -52,6 +55,7 @@ public class MotosController : ControllerBase
     //este metodo sirve para modificar motos 
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> ActualizarMoto(int id, MotoRent.Api.Models.Moto motoActualizada)
     {
         var moto = await _context.Motos.FindAsync(id);
@@ -73,6 +77,7 @@ public class MotosController : ControllerBase
     }
     //este metodo se utiliza para eliminar motos 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> EliminarMoto(int id)
     {
         var moto = await _context.Motos.FindAsync(id);

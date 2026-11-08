@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import api from './services/api';
-
+import Solicitudes from './pages/Solicitudes';
+import Pagos from './pages/Pagos';
+import BotonCerrarSesion from './components/BotonCerrarSesion';
 
 
 
@@ -25,6 +27,7 @@ const secciones = [
   { nombre: 'Motos', icono: Bike },
   { nombre: 'Clientes', icono: Users },
   { nombre: 'Alquileres', icono: ClipboardList },
+  { nombre: 'Solicitudes', icono: ClipboardList },
   { nombre: 'Pagos', icono: CreditCard },
 ];
 
@@ -60,6 +63,9 @@ const [clientes, setClientes] = useState([]);
 const [cargandoClientes, setCargandoClientes] = useState(false);
 const [errorClientes, setErrorClientes] = useState('');
 
+const [estadosCuentas, setEstadosCuentas] = useState({});
+const [cargandoEstadosCuentas, setCargandoEstadosCuentas] = useState(true);
+
 // Estados para registrar y editar clientes
 const [mostrarFormularioCliente, setMostrarFormularioCliente] = useState(false);
 const [guardandoCliente, setGuardandoCliente] = useState(false);
@@ -76,17 +82,27 @@ const [nuevoCliente, setNuevoCliente] = useState({
 const [modoEdicionCliente, setModoEdicionCliente] = useState(false);
 const [clienteEditandoId, setClienteEditandoId] = useState(null);
 
-
+//cuentas clientes
+const [clienteAccesoId, setClienteAccesoId] = useState(null);
+const [claveTemporal, setClaveTemporal] = useState('');
+const [guardandoAcceso, setGuardandoAcceso] = useState(false);
+const [errorAcceso, setErrorAcceso] = useState('');
 
 // Estados de los alquileres
 const [alquileres, setAlquileres] = useState([]);
 const [cargandoAlquileres, setCargandoAlquileres] = useState(false);
 const [errorAlquileres, setErrorAlquileres] = useState('');
 
+// Estados de las solicitudes
+const [solicitudes, setSolicitudes] = useState([]);
+const [cargandoSolicitudes, setCargandoSolicitudes] = useState(false);
+const [errorSolicitudes, setErrorSolicitudes] = useState('');
+
 // Estados para registrar alquileres
 const [mostrarFormularioAlquiler, setMostrarFormularioAlquiler] = useState(false);
 const [guardandoAlquiler, setGuardandoAlquiler] = useState(false);
 const [errorFormularioAlquiler, setErrorFormularioAlquiler] = useState('');
+
 
 const [nuevoAlquiler, setNuevoAlquiler] = useState({
   clienteId: '',
@@ -94,6 +110,11 @@ const [nuevoAlquiler, setNuevoAlquiler] = useState({
   fechaInicio: '',
   opcionCompra: false,
 });
+
+//estadps de pago 
+const [pagos, setPagos] = useState([]);
+const [cargandoPagos, setCargandoPagos] = useState(false);
+const [errorPagos, setErrorPagos] = useState('');
 
 // Actualizar un campo del formulario
 const manejarCambioMoto = (e) => {
@@ -352,6 +373,45 @@ const devolverAlquiler = async (id) => {
   }
 };
 
+// Aprobar una solicitud
+const aprobarSolicitud = async (id) => {
+  try {
+    await api.put(`/Solicitudes/${id}/aprobar`);
+
+    const respuesta = await api.get('/Solicitudes');
+    setSolicitudes(respuesta.data);
+
+    alert('Solicitud aprobada correctamente.');
+  } catch (error) {
+  console.error('Error al aprobar solicitud:', error);
+
+  const mensaje = error.response?.data;
+
+  alert(
+    typeof mensaje === 'string'
+      ? mensaje
+      : mensaje?.mensaje || 'No se pudo aprobar la solicitud.'
+  );
+}
+};
+
+// Rechazar una solicitud
+const rechazarSolicitud = async (id) => {
+  try {
+    await api.put(`/Solicitudes/${id}/rechazar`);
+
+    const respuesta = await api.get('/Solicitudes');
+    setSolicitudes(respuesta.data);
+
+    alert('Solicitud rechazada correctamente.');
+  } catch (error) {
+    console.error('Error al rechazar solicitud:', error);
+    alert(error.response?.data?.mensaje || 'No se pudo rechazar la solicitud.');
+  }
+};
+
+
+
   // Obtener motos desde la API
   useEffect(() => {
     if (seccion !== 'Motos' && seccion !== 'Alquileres') return;
@@ -419,6 +479,123 @@ useEffect(() => {
 
   obtenerAlquileres();
 }, [seccion]);
+// Cargar solicitudes desde la API
+useEffect(() => {
+  if (seccion !== 'Solicitudes') return;
+
+  const cargarSolicitudes = async () => {
+    try {
+      setCargandoSolicitudes(true);
+      setErrorSolicitudes('');
+
+      const respuesta = await api.get('/Solicitudes');
+
+      setSolicitudes(respuesta.data);
+    } catch (error) {
+      console.error('Error al cargar solicitudes:', error);
+      setErrorSolicitudes('No se pudieron cargar las solicitudes.');
+    } finally {
+      setCargandoSolicitudes(false);
+    }
+  };
+
+  cargarSolicitudes();
+}, [seccion]);
+
+// Cargar pagos cuando entramos a la sección Pagos
+useEffect(() => {
+  if (seccion !== 'Pagos') return;
+
+  const cargarPagos = async () => {
+    try {
+      setCargandoPagos(true);
+      setErrorPagos('');
+
+      const respuesta = await api.get('/Pagos');
+
+      setPagos(respuesta.data);
+    } catch (error) {
+      console.error('Error al cargar pagos:', error);
+      setErrorPagos('No se pudieron cargar los pagos.');
+    } finally {
+      setCargandoPagos(false);
+    }
+  };
+
+  cargarPagos();
+}, [seccion]);
+
+useEffect(() => {
+  if (seccion !== 'Clientes') return;
+
+  const cargarEstadosCuentas = async () => {
+    try {
+      setCargandoEstadosCuentas(true);
+
+      const respuesta = await api.get('/cuentas-clientes/estados');
+
+      const estados = {};
+
+      respuesta.data.forEach((item) => {
+        estados[item.clienteId] = item;
+      });
+
+      setEstadosCuentas(estados);
+    } catch (error) {
+      console.error('Error al consultar cuentas:', error);
+      setEstadosCuentas({});
+    } finally {
+      setCargandoEstadosCuentas(false);
+    }
+  };
+
+  cargarEstadosCuentas();
+}, [seccion]);
+
+//asigna el rol cliene automaticamente 
+
+const crearAccesoCliente = async (e, clienteId) => {
+  e.preventDefault();
+
+  try {
+    setGuardandoAcceso(true);
+    setErrorAcceso('');
+
+    const respuesta = await api.post('/cuentas-clientes', {
+      clienteId,
+      password: claveTemporal
+    });
+
+    // Actualizar el estado de la cuenta en la tabla
+    setEstadosCuentas((anteriores) => ({
+      ...anteriores,
+      [clienteId]: {
+        ...anteriores[clienteId],
+        tieneCuenta: true
+      }
+    }));
+
+    setClienteAccesoId(null);
+    setClaveTemporal('');
+
+    alert(respuesta.data.mensaje);
+
+  } catch (error) {
+    console.error('Error al crear cuenta:', error);
+
+    const datos = error.response?.data;
+
+    setErrorAcceso(
+      typeof datos === 'string'
+        ? datos
+        : datos?.errores?.join(', ') ||
+          datos?.mensaje ||
+          'No se pudo crear la cuenta.'
+    );
+  } finally {
+    setGuardandoAcceso(false);
+  }
+};
 
 
   return (
@@ -436,20 +613,22 @@ useEffect(() => {
 
         <p className="menu-label">MENÚ PRINCIPAL</p>
 
-        <nav className="nav flex-column">
-          {secciones.map(({ nombre, icono: Icono }) => (
-            <button
-              key={nombre}
-              className={`nav-link ${
-                seccion === nombre ? 'active' : ''
-              }`}
-              onClick={() => setSeccion(nombre)}
-            >
-              <Icono size={19} />
-              <span>{nombre}</span>
-            </button>
-          ))}
-        </nav>
+       <nav className="nav flex-column">
+  {secciones.map(({ nombre, icono: Icono }) => (
+    <button
+      key={nombre}
+      className={`nav-link ${
+        seccion === nombre ? 'active' : ''
+      }`}
+      onClick={() => setSeccion(nombre)}
+    >
+      <Icono size={19} />
+      <span>{nombre}</span>
+    </button>
+  ))}
+
+  
+</nav>
 
         <div className="sidebar-footer">
           <div className="status-dot" />
@@ -473,15 +652,18 @@ useEffect(() => {
           </div>
 
           <div className="topbar-right">
-            <span className="admin-label">Administrador</span>
-            <div className="avatar">A</div>
-            <button
-              className="icon-button"
-              aria-label="Notificaciones"
-            >
-              <Bell size={20} />
-            </button>
-          </div>
+  <span className="admin-label">Administrador</span>
+  <div className="avatar">A</div>
+
+  <BotonCerrarSesion />
+
+  <button
+    className="icon-button"
+    aria-label="Notificaciones"
+  >
+    <Bell size={20} />
+  </button>
+</div>
         </header>
 
         <section className="page-content">
@@ -909,6 +1091,7 @@ useEffect(() => {
             <th>DNI</th>
             <th>Teléfono</th>
             <th>Email</th>
+            <th>Cuenta de acceso</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -921,20 +1104,91 @@ useEffect(() => {
               <td>{cliente.dni}</td>
               <td>{cliente.telefono}</td>
               <td>{cliente.email}</td>
-            <td>
-          <button
-          className="btn btn-sm btn-outline-primary"
-          onClick={() => editarCliente(cliente)}
-         >
-    Editar
-  </button>
+              <td>
+  {cargandoEstadosCuentas ? (
+    <span className="text-muted">Consultando...</span>
+  ) : estadosCuentas[cliente.id]?.tieneCuenta ? (
+    <span className="badge bg-success">
+      Cuenta creada
+    </span>
+  ) : estadosCuentas[cliente.id]?.tieneAlquilerActivo ? (
+    <span className="badge bg-warning text-dark">
+      Sin cuenta
+    </span>
+  ) : (
+    <span className="badge bg-secondary">
+      Sin alquiler activo
+    </span>
+  )}
 </td>
+            
+<td>
+  <div className="d-flex gap-2 flex-wrap">
+    <button
+      className="btn btn-sm btn-outline-primary"
+      onClick={() => editarCliente(cliente)}
+    >
+      Editar
+    </button>
+
+    {!cargandoEstadosCuentas &&
+      estadosCuentas[cliente.id]?.tieneAlquilerActivo &&
+      !estadosCuentas[cliente.id]?.tieneCuenta && (
+        <button
+          className="btn btn-sm btn-outline-success"
+          onClick={() => {
+            setClienteAccesoId(
+              clienteAccesoId === cliente.id ? null : cliente.id
+            );
+            setClaveTemporal('');
+            setErrorAcceso('');
+          }}
+        >
+          Crear acceso
+        </button>
+      )}
+  </div>
+
+  {clienteAccesoId === cliente.id && (
+    <form
+      className="mt-3"
+      onSubmit={(e) => crearAccesoCliente(e, cliente.id)}
+    >
+      <label className="form-label">
+        Contraseña temporal
+      </label>
+
+      <input
+        type="password"
+        className="form-control form-control-sm mb-2"
+        value={claveTemporal}
+        onChange={(e) => setClaveTemporal(e.target.value)}
+        autoComplete="new-password"
+        minLength={6}
+        required
+      />
+
+      {errorAcceso && (
+        <p className="text-danger small">{errorAcceso}</p>
+      )}
+
+      <button
+        type="submit"
+        className="btn btn-sm btn-success"
+        disabled={guardandoAcceso}
+      >
+        {guardandoAcceso ? 'Creando...' : 'Guardar acceso'}
+      </button>
+    </form>
+  )}
+</td>
+
             </tr>
           ))}
 
           {clientes.length === 0 && (
             <tr>
-              <td colSpan="6">No hay clientes registrados.</td>
+              <td colSpan="7">No hay clientes registrados.</td>
             </tr>
           )}
         </tbody>
@@ -1154,7 +1408,25 @@ useEffect(() => {
       </div>
     )}
   </article>
+
+
+  ) : seccion === 'Solicitudes' ? (
+    <Solicitudes
+      solicitudes={solicitudes}
+      cargando={cargandoSolicitudes}
+      error={errorSolicitudes}
+      onAprobar={aprobarSolicitud}
+      onRechazar={rechazarSolicitud}
+    />
+ 
+    ) : seccion === 'Pagos' ? (
+  <Pagos
+    pagos={pagos}
+    cargando={cargandoPagos}
+    error={errorPagos}
+  />
 ) : (
+
   <article className="placeholder-card">
     <div className="placeholder-icon">
       {(() => {
@@ -1181,6 +1453,7 @@ useEffect(() => {
     </button>
   </article>
 )}
+
 
         </section>
       </main>

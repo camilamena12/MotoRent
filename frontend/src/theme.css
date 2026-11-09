@@ -1,0 +1,358 @@
+/* =========================================================
+   MotoRent · Tema visual global
+   Solo estilos: no cambia lógica, campos ni llamadas a la API.
+   Colores tomados del logo (azul marino + azul).
+   ========================================================= */
+
+:root {
+  --mr-navy: #0b1f3a;
+  --mr-navy-2: #132c50;
+  --mr-blue: #1565e0;
+  --mr-blue-dark: #0f4fb5;
+  --mr-blue-soft: #e8f0fd;
+  --mr-ink: #14213a;
+  --mr-muted: #66748b;
+  --mr-line: #e3e9f2;
+  --mr-bg: #f4f7fb;
+  --mr-white: #ffffff;
+  --mr-green: #17a673;
+  --mr-amber: #e8a317;
+  --mr-red: #dc3545;
+  --mr-radius: 14px;
+  --mr-shadow: 0 1px 2px rgba(11, 31, 58, 0.04), 0 8px 24px rgba(11, 31, 58, 0.06);
+  --mr-shadow-lg: 0 18px 50px rgba(11, 31, 58, 0.14);
+  --mr-font: "Inter", "Segoe UI", Arial, sans-serif;
+  --mr-display: "Plus Jakarta Sans", "Inter", "Segoe UI", Arial, sans-serif;
+
+  /* Variables de Bootstrap */
+  --bs-primary: #1565e0;
+  --bs-primary-rgb: 21, 101, 224;
+  --bs-link-color: #1565e0;
+  --bs-link-color-rgb: 21, 101, 224;
+  --bs-link-hover-color: #0f4fb5;
+  --bs-link-hover-color-rgb: 15, 79, 181;
+  --bs-body-font-family: var(--mr-font);
+  --bs-body-color: #14213a;
+  --bs-body-bg: #f4f7fb;
+  --bs-border-color: #e3e9f2;
+  --bs-border-radius: 10px;
+  --bs-secondary-color: #66748b;
+}
+
+body {
+  background: var(--mr-bg);
+  color: var(--mr-ink);
+  font-family: var(--mr-font);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--mr-display);
+  color: var(--mr-ink);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-muted { color: var(--mr-muted) !important; }
+
+::selection { background: #cfe0fb; }
+
+/* ---------- Tarjetas ---------- */
+.card {
+  border: 1px solid var(--mr-line);
+  border-radius: var(--mr-radius);
+  background: var(--mr-white);
+  box-shadow: var(--mr-shadow);
+}
+.card.shadow-sm { box-shadow: var(--mr-shadow) !important; }
+.card .card { box-shadow: none !important; }
+.card-body { padding: 1.5rem; }
+.card-body h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.15rem;
+}
+.card-body h4 > svg { color: var(--mr-blue); }
+
+/* ---------- Botones ---------- */
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.6rem 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:focus-visible { box-shadow: 0 0 0 4px rgba(21, 101, 224, 0.2); }
+.btn-sm { padding: 0.35rem 0.7rem; border-radius: 8px; }
+
+.btn-primary {
+  --bs-btn-bg: var(--mr-blue);
+  --bs-btn-border-color: var(--mr-blue);
+  --bs-btn-hover-bg: var(--mr-blue-dark);
+  --bs-btn-hover-border-color: var(--mr-blue-dark);
+  --bs-btn-active-bg: var(--mr-blue-dark);
+  --bs-btn-active-border-color: var(--mr-blue-dark);
+  --bs-btn-disabled-bg: #9db9e6;
+  --bs-btn-disabled-border-color: #9db9e6;
+  box-shadow: 0 6px 16px rgba(21, 101, 224, 0.22);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--mr-blue);
+  --bs-btn-border-color: #c4d6f5;
+  --bs-btn-hover-bg: var(--mr-blue-soft);
+  --bs-btn-hover-color: var(--mr-blue-dark);
+  --bs-btn-hover-border-color: #a9c4f0;
+  --bs-btn-active-bg: #d9e6fb;
+  --bs-btn-active-color: var(--mr-blue-dark);
+  --bs-btn-active-border-color: #a9c4f0;
+  --bs-btn-disabled-color: #9aaecb;
+  --bs-btn-disabled-border-color: #dbe4f2;
+  background: var(--mr-white);
+}
+.btn-success {
+  --bs-btn-bg: var(--mr-green);
+  --bs-btn-border-color: var(--mr-green);
+  --bs-btn-hover-bg: #128a5f;
+  --bs-btn-hover-border-color: #128a5f;
+  --bs-btn-active-bg: #128a5f;
+}
+.btn-outline-success {
+  --bs-btn-color: var(--mr-green);
+  --bs-btn-border-color: #bfe6d6;
+  --bs-btn-hover-bg: #e5f6ef;
+  --bs-btn-hover-color: #0f7a53;
+  --bs-btn-hover-border-color: #9ad8bf;
+}
+.btn-outline-danger {
+  --bs-btn-color: var(--mr-red);
+  --bs-btn-border-color: #f2c4c9;
+  --bs-btn-hover-bg: #fdecee;
+  --bs-btn-hover-color: #b42332;
+  --bs-btn-hover-border-color: #ea9ea7;
+}
+.btn-link {
+  text-decoration: none;
+  color: var(--mr-muted);
+  padding-left: 0;
+}
+.btn-link:hover { color: var(--mr-blue); }
+
+/* ---------- Formularios ---------- */
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #3b4a63;
+  margin-bottom: 0.4rem;
+}
+.form-control,
+.form-select {
+  border: 1px solid #d6dfec;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+  background-color: #fbfcfe;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.form-control-sm { padding: 0.4rem 0.6rem; border-radius: 8px; }
+.form-control::placeholder { color: #a1adc0; }
+.form-control:hover,
+.form-select:hover { border-color: #bccbe0; }
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--mr-blue);
+  background-color: var(--mr-white);
+  box-shadow: 0 0 0 4px rgba(21, 101, 224, 0.14);
+}
+.form-check-input:checked {
+  background-color: var(--mr-blue);
+  border-color: var(--mr-blue);
+}
+.form-check-input:focus { box-shadow: 0 0 0 4px rgba(21, 101, 224, 0.14); }
+.form-check-label { color: #3b4a63; }
+
+/* ---------- Tablas ---------- */
+.table-responsive {
+  border: 1px solid var(--mr-line);
+  border-radius: var(--mr-radius);
+  background: var(--mr-white);
+}
+.table { margin-bottom: 0; --bs-table-bg: transparent; }
+.table > thead th {
+  background: #f6f8fc;
+  color: var(--mr-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--mr-line);
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+}
+.table > tbody td {
+  padding: 0.85rem 1rem;
+  border-color: #eef2f7;
+  color: #2b3a52;
+  font-size: 0.92rem;
+}
+.table > tbody tr:last-child td { border-bottom: 0; }
+.table-hover > tbody > tr:hover > * { --bs-table-bg-state: #f5f8fe; }
+.table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-bg-type: #fafbfd; }
+
+/* ---------- Etiquetas ---------- */
+.badge {
+  font-weight: 600;
+  font-size: 0.74rem;
+  padding: 0.4em 0.75em;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+.badge.bg-success { background: #e3f6ee !important; color: #0f7a53 !important; }
+.badge.bg-warning { background: #fdf3dc !important; color: #8a5d00 !important; }
+
+/* ---------- Alertas ---------- */
+.alert {
+  border-radius: 12px;
+  border-width: 1px;
+  padding: 1rem 1.15rem;
+}
+.alert-danger { background: #fdeef0; border-color: #f6cdd2; color: #9b1c2b; }
+.alert-warning { background: #fff8e8; border-color: #f6e1ad; color: #6b4d00; }
+.alert-warning h5 { color: #5a4100; font-size: 1rem; }
+.alert-light { background: #f7f9fd; border-color: var(--mr-line) !important; }
+.alert p { margin-bottom: 0.35rem; }
+
+/* =========================================================
+   Login
+   ========================================================= */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(21, 101, 224, 0.35), transparent 60%),
+    radial-gradient(700px 500px at 110% 110%, rgba(21, 101, 224, 0.25), transparent 60%),
+    var(--mr-navy);
+}
+.auth-page > .card {
+  width: 100%;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: var(--mr-shadow-lg) !important;
+}
+.auth-page .card-body { padding: 2.25rem !important; }
+.auth-page .text-center > svg {
+  width: 56px;
+  height: 56px;
+  padding: 14px;
+  border-radius: 16px;
+  color: var(--mr-blue);
+  background: var(--mr-blue-soft);
+}
+.auth-page h2 { font-size: 1.6rem; margin-bottom: 0.35rem; }
+.auth-page .btn-primary { padding: 0.75rem 1rem; }
+
+/* =========================================================
+   Panel del cliente
+   ========================================================= */
+.cliente-page {
+  max-width: 1100px;
+}
+.cliente-page > .d-flex:first-child {
+  padding: 28px 30px;
+  border-radius: 18px;
+  background:
+    radial-gradient(600px 260px at 100% 0%, rgba(21, 101, 224, 0.45), transparent 60%),
+    var(--mr-navy);
+  color: #fff;
+  align-items: center !important;
+}
+.cliente-page > .d-flex:first-child h2 { color: #fff; margin-bottom: 4px; }
+.cliente-page > .d-flex:first-child .text-muted { color: #aebcd3 !important; margin: 0; }
+.cliente-page > .d-flex:first-child .btn-outline-primary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.cliente-page > .d-flex:first-child .btn-outline-primary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.cliente-page .row .card-body > svg {
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  border-radius: 12px;
+  color: var(--mr-blue);
+  background: var(--mr-blue-soft);
+  margin-bottom: 14px !important;
+}
+.cliente-page .row .col-md-4:nth-child(2) .card-body > svg { color: #b57a00; background: #fdf3dc; }
+.cliente-page .row .col-md-4:nth-child(3) .card-body > svg { color: #b42332; background: #fdecee; }
+.cliente-page .row .card-body h3 { font-size: 1.9rem; margin: 0; }
+.cliente-page .row .card-body p.text-muted { font-size: 0.82rem; font-weight: 600; }
+.cliente-page .card .card { border: 1px solid var(--mr-line); background: #fbfcfe; }
+.cliente-page .alert-light h4 { color: var(--mr-blue-dark); }
+
+/* =========================================================
+   Solicitud de alquiler
+   ========================================================= */
+.solicitud-page { max-width: 880px; }
+.solicitud-page > h1 { font-size: clamp(1.8rem, 3vw, 2.3rem); margin-bottom: 0.25rem; }
+.solicitud-page > h1 + p { color: var(--mr-muted); margin-bottom: 1.5rem; }
+.solicitud-page > .card:not(form) {
+  border: 0;
+  color: #fff;
+  background:
+    radial-gradient(500px 220px at 100% 0%, rgba(21, 101, 224, 0.55), transparent 60%),
+    var(--mr-navy);
+}
+.solicitud-page > .card:not(form) h4,
+.solicitud-page > .card:not(form) h5 { color: #fff; }
+.solicitud-page > .card:not(form) p { color: #aebcd3; margin-bottom: 0.5rem; }
+.solicitud-page > .card:not(form) h5 {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
+}
+.solicitud-page form.card { padding: 1.75rem; }
+.solicitud-page form .btn-danger {
+  --bs-btn-bg: var(--mr-blue);
+  --bs-btn-border-color: var(--mr-blue);
+  --bs-btn-hover-bg: var(--mr-blue-dark);
+  --bs-btn-hover-border-color: var(--mr-blue-dark);
+  --bs-btn-active-bg: var(--mr-blue-dark);
+  padding: 0.8rem 1rem;
+  box-shadow: 0 6px 16px rgba(21, 101, 224, 0.22);
+}
+.solicitud-page .text-success,
+.solicitud-page .text-danger {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-left: calc(var(--bs-gutter-x) * 0.5);
+  width: auto;
+}
+.solicitud-page .text-success { background: #e3f6ee; color: #0f7a53 !important; }
+.solicitud-page .text-danger { background: #fdeef0; color: #9b1c2b !important; }
+
+/* =========================================================
+   Tablas del panel admin (Solicitudes / Pagos)
+   ========================================================= */
+.page-content h2.mb-4,
+.page-content > div > h2 { font-size: 1.4rem; }
+.page-content .card.card-body { padding: 1.5rem; }
+
+@media (max-width: 700px) {
+  .card-body { padding: 1.15rem; }
+  .auth-page .card-body { padding: 1.6rem !important; }
+  .cliente-page > .d-flex:first-child { padding: 22px; }
+  .solicitud-page form.card { padding: 1.15rem; }
+}

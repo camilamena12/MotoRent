@@ -112,7 +112,7 @@ const validarDni = async () => {
 };
   if (!moto) {
     return (
-      <div className="container py-5">
+      <div className="container py-5 solicitud-page">
         <h2>No se seleccionó ninguna moto.</h2>
         <button className="btn btn-primary" onClick={() => navigate('/')}>
           Volver al catálogo
@@ -122,7 +122,7 @@ const validarDni = async () => {
   }
 
   return (
-    <div className="container py-5">
+    <div className="container py-5 solicitud-page">
       <button
         className="btn btn-link mb-3"
         onClick={() => navigate('/')}

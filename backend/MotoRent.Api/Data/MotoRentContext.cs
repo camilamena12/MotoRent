@@ -45,6 +45,12 @@ public class MotoRentContext : IdentityDbContext<Usuario>
         modelBuilder.Entity<OrdenPago>()
     .Property(o => o.ImporteTotal)
     .HasPrecision(18, 2);
+
+        // Evitar pagos duplicados para un mismo alquiler y día
+        modelBuilder.Entity<Pago>()
+            .HasIndex(p => new { p.AlquilerId, p.DiaAlquilado })
+            .IsUnique()
+            .HasFilter("[Estado] IN ('Pendiente', 'Confirmado')");
     }
 
 }

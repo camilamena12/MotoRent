@@ -340,7 +340,9 @@ namespace MotoRent.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlquilerId");
+                    b.HasIndex("AlquilerId", "DiaAlquilado")
+                        .IsUnique()
+                        .HasFilter("[Estado] IN ('Pendiente', 'Confirmado')");
 
                     b.ToTable("Pagos");
                 });

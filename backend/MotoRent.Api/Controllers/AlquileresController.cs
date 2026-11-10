@@ -171,7 +171,13 @@ public class AlquileresController : ControllerBase
         {
             return BadRequest("El alquiler no está activo.");
         }
-
+        // No permitir devoluciones antes del inicio del alquiler
+        if (DateTime.Today < alquiler.FechaInicio.Date)
+        {
+            return BadRequest(
+                "No se puede devolver una moto antes de la fecha de inicio del alquiler."
+            );
+        }
         alquiler.FechaDevolucion = DateTime.Now;
         alquiler.Estado = "Finalizado";
 

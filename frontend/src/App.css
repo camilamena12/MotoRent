@@ -1,12 +1,12 @@
 
 .app-layout {
   min-height: 100vh;
-  background: #f5f7fb;
+  background: #f4f7fb;
 }
 
 .sidebar {
   width: 250px;
-  background: #172235;
+  background: #0b1f3a;
   color: #fff;
   position: fixed;
   inset: 0 auto 0 0;
@@ -85,19 +85,19 @@
 }
 
 .sidebar .nav-link:hover {
-  background: #25344b;
+  background: #16305a;
   color: #fff;
 }
 
 .sidebar .nav-link.active {
-  background: #3267ce;
+  background: #1565e0;
   color: white;
   box-shadow: 0 5px 14px #0d1423;
 }
 
 .sidebar-footer {
   margin-top: auto;
-  border-top: 1px solid #344056;
+  border-top: 1px solid #1d3456;
   padding: 20px 6px 0;
   font-size: 12px;
   color: #d2d9e4;
@@ -363,7 +363,7 @@
   border: 0;
   border-radius: 8px;
   padding: 11px 15px;
-  background: #2f63c5;
+  background: #1565e0;
   color: white;
   font-size: 12px;
   font-weight: 650;
@@ -374,7 +374,7 @@
 }
 
 .primary-button:hover {
-  background: #244fa0;
+  background: #0f4fb5;
 }
 
 .quick-card h3 {
@@ -412,7 +412,7 @@
 }
 
 .quick-link:hover {
-  color: #2f63c5;
+  color: #1565e0;
 }
 
 .quick-icon {
@@ -438,7 +438,7 @@
   width: 65px;
   height: 65px;
   background: #eaf1ff;
-  color: #3267ce;
+  color: #1565e0;
   border-radius: 17px;
   margin: 0 auto 22px;
 }
@@ -472,7 +472,7 @@
 
 @media (max-width: 700px) {
   .sidebar {
-    box-shadow: 10px 0 35px #17223525;
+    box-shadow: 10px 0 35px #0b1f3a25;
   }
 
   .main-content {
@@ -505,3 +505,48 @@
     padding: 22px;
   }
 }
+
+/* ---- Ajustes visuales MotoRent ---- */
+.sidebar {
+  background:
+    radial-gradient(400px 300px at 0% 0%, rgba(21, 101, 224, 0.28), transparent 60%),
+    #0b1f3a;
+}
+.brand-logo { max-width: 120px; padding: 6px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
+.sidebar .nav-link { font-weight: 500; transition: background-color 0.15s ease, color 0.15s ease; }
+.sidebar .nav-link.active { box-shadow: 0 8px 20px rgba(21, 101, 224, 0.35); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: saturate(160%) blur(10px);
+}
+.welcome-row h1, .welcome-card h2, .section-heading h2, .placeholder-card h2, .quick-card h3 {
+  font-family: var(--mr-display);
+}
+.stat-card, .quick-card, .placeholder-card {
+  box-shadow: var(--mr-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--mr-shadow-lg); }
+.stat-card > strong { font-family: var(--mr-display); }
+.welcome-card {
+  color: #fff;
+  border: 0;
+  background:
+    radial-gradient(500px 260px at 100% 0%, rgba(21, 101, 224, 0.55), transparent 60%),
+    #0b1f3a;
+}
+.welcome-card h2 { color: #fff; }
+.welcome-card .eyebrow { color: #7fb0ff; }
+.welcome-card > p:not(.eyebrow) { color: #aebcd3; }
+.welcome-card-icon { background: rgba(255, 255, 255, 0.1); color: #8dbaff; }
+.primary-button {
+  border-radius: 10px;
+  padding: 11px 17px;
+  font-size: 13px;
+  box-shadow: 0 6px 16px rgba(21, 101, 224, 0.25);
+  transition: background-color 0.15s ease;
+}
+.avatar { background: #e8f0fd; color: #1565e0; }

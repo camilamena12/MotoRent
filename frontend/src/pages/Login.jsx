@@ -51,7 +51,7 @@ function Login() {
   };
 
   return (
-    <div className="container py-5">
+    <div className="auth-page">
       <div
         className="card shadow-sm mx-auto"
         style={{ maxWidth: '420px' }}

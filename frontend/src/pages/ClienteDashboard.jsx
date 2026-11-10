@@ -251,7 +251,7 @@ const cancelarOrdenPendiente = async () => {
   }
 
   return (
-    <div className="container py-5">
+    <div className="container py-5 cliente-page">
       <div className="d-flex justify-content-between align-items-start mb-4 flex-wrap gap-3">
   <div>
     <h2>Mi cuenta</h2>

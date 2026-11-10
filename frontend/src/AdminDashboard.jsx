@@ -787,7 +787,7 @@ const crearAccesoCliente = async (e, clienteId) => {
             </>
           ) : seccion === 'Motos' ? (
            
-<article className="placeholder-card">
+<article className="placeholder-card motos-ancho">
   <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
     <h2 className="mb-0">Motos registradas</h2>
 
@@ -970,7 +970,7 @@ const crearAccesoCliente = async (e, clienteId) => {
 </article>
 
           ) : seccion === 'Clientes' ? (
-            <article className="placeholder-card">
+          <article className="placeholder-card clientes-ancho">
   <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
     <h2 className="mb-0">Clientes registrados</h2>
 
@@ -1198,7 +1198,7 @@ const crearAccesoCliente = async (e, clienteId) => {
 </article>
           
 ) : seccion === 'Alquileres' ? (
-  <article className="placeholder-card">
+  <article className="placeholder-card alquileres-ancho">
     <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
       <h2 className="mb-0">Alquileres registrados</h2>
 

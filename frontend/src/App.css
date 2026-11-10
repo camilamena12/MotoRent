@@ -550,3 +550,42 @@
   transition: background-color 0.15s ease;
 }
 .avatar { background: #e8f0fd; color: #1565e0; }
+/* Contenedor más ancho para la tabla de alquileres */
+.placeholder-card.alquileres-ancho {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* Permitir desplazamiento horizontal solo si es necesario */
+.alquileres-ancho .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Contenedor más ancho para Clientes */
+.placeholder-card.clientes-ancho {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* Tabla adaptable */
+.clientes-ancho .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Contenedor más ancho para Motos */
+.placeholder-card.motos-ancho {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+}
+
+
+.motos-ancho .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}

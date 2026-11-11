@@ -93,11 +93,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173",
-        "http://localhost:5174"
-      )
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "https://motorent-tucuman.netlify.app/"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+
     });
 });
 // Conexión con la API RENAPER de nuestros compañeros
@@ -150,8 +154,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Crear el administrador de prueba solo en desarrollo
-if (app.Environment.IsDevelopment())
+// Crear el administrador si no existe, en desarrollo o producción
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     using var scope = app.Services.CreateScope();
 

@@ -59,8 +59,19 @@ public class SolicitudesController : ControllerBase
         [FromBody] CrearSolicitudRequest request)
     {
         // 1. Comprobar la fecha
+
+        var zonaArgentina = TimeZoneInfo.FindSystemTimeZoneById(
+            "America/Argentina/Buenos_Aires"
+        );
+
+        var hoyArgentina = TimeZoneInfo.ConvertTimeFromUtc(
+            DateTime.UtcNow,
+            zonaArgentina
+        ).Date;
+
         if (!request.FechaInicioSolicitada.HasValue ||
-            request.FechaInicioSolicitada.Value.Date < DateTime.Today)
+            request.FechaInicioSolicitada.Value.Date < hoyArgentina)
+
         {
             return BadRequest("La fecha de inicio no puede ser anterior a hoy.");
         }

@@ -3,12 +3,13 @@ import { Bike, ShieldCheck, Clock, ArrowRight } from 'lucide-react';
 import './Home.css';
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import motoImage from '../assets/moto.png';
 
 
 
 
 function Home() {
-//conectar el catalogo con la API
+
 const [motos, setMotos] = useState([]);
 const [cargando, setCargando] = useState(true);
 const [error, setError] = useState('');
@@ -63,17 +64,16 @@ useEffect(() => {
       {/* Presentación */}
       <section className="home-hero" id="inicio">
         <div className="hero-content">
-          <span className="hero-label">MOTORENT · ALQUILER DE MOTOS</span>
-
+          
           <h1>
-            Tu próximo camino
-            <br />
-            <span>empieza acá.</span>
+            Queres trabajar con aplicaciones y no tenes moto?
+                        <br />
+            <span>Aca tenemos la solución.</span>
           </h1>
 
           <p>
-            Alquilá tu moto y empezá a trabajar.
-            Una solución práctica para moverte y generar ingresos.
+            Alquilá tu moto y empezá a generar ingresos.
+            Una solución práctica para trabajar con aplicaciones como Uber, Pedidos Ya, Didi, etc.
           </p>
 
           <a href="#motos" className="hero-button">
@@ -83,7 +83,7 @@ useEffect(() => {
         </div>
 
         <div className="hero-image">
-          <Bike size={180} strokeWidth={1} />
+          <img className="hero-motorcycle" src={motoImage} alt="MotoRent" />
         </div>
       </section>
 
@@ -112,7 +112,7 @@ useEffect(() => {
       <section className="home-catalog" id="motos">
         <span className="hero-label">CONOCÉ MOTORENT</span>
         <h2>Nuestras motos</h2>
-        <p>Encontrá una moto para comenzar tu próximo proyecto.</p>
+        <p>Encontrá una moto para comenzar a generar ingresos, a tu tiempo y en tus horarios.</p>
 
       {cargando ? (
   <p>Cargando motos disponibles...</p>
@@ -153,14 +153,14 @@ useEffect(() => {
       {/* Requisitos */}
       <section className="home-requirements" id="requisitos">
         <h2>¿Qué necesitás para alquilar?</h2>
-        <p>Te contamos los requisitos para iniciar tu solicitud.</p>
+        <p>Minimos requisitos</p>
 
         <ul>
-          <li>DNI.</li>
-          <li>Factura de servicio.</li>
-          <li>Antecedentes penales.</li>
-          <li>Licencia de conducir vigente.</li>
-          <li>Garante.</li>
+          <li>DNI</li>
+          <li>Factura de servicio</li>
+          <li>Antecedentes penales</li>
+          <li>Licencia de conducir vigente</li>
+          <li>Garante</li>
         </ul>
       </section>
 
@@ -168,6 +168,8 @@ useEffect(() => {
       <footer className="home-footer" id="contacto">
         <h2>MotoRent</h2>
         <p>Tu moto, tu oportunidad.</p>
+        <p>Motorent@gmail.com</p>
+        <p>3816688507</p>
         <span>© 2026 MotoRent. Todos los derechos reservados.</span>
       </footer>
 

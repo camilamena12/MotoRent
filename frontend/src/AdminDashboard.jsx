@@ -597,6 +597,42 @@ const crearAccesoCliente = async (e, clienteId) => {
   }
 };
 
+useEffect(() => {
+  if (seccion !== 'Inicio') return;
+
+  const cargarResumen = async () => {
+    try {
+      const [
+        respuestaMotos,
+        respuestaClientes,
+        respuestaAlquileres,
+        respuestaPagos
+      ] = await Promise.all([
+        api.get('/Motos'),
+        api.get('/Clientes'),
+        api.get('/Alquileres'),
+        api.get('/Pagos')
+      ]);
+
+      const alquileresActivos = respuestaAlquileres.data.filter(
+        (alquiler) =>
+          alquiler.estado?.toLowerCase() === 'activo'
+      );
+
+      setResumen({
+        motos: respuestaMotos.data.length,
+        clientes: respuestaClientes.data.length,
+        alquileresActivos: alquileresActivos.length,
+        pagos: respuestaPagos.data.length,
+      });
+
+    } catch (error) {
+      console.error('Error al cargar el resumen:', error);
+    }
+  };
+
+  cargarResumen();
+}, [seccion]);
 
   return (
     <div className="app-layout">
@@ -632,8 +668,8 @@ const crearAccesoCliente = async (e, clienteId) => {
 
         <div className="sidebar-footer">
           <div className="status-dot" />
-          Sistema de gestión
-          <small>Versión de desarrollo</small>
+         MotoRent - Sistema de alquileres
+          
         </div>
       </aside>
 
@@ -675,11 +711,6 @@ const crearAccesoCliente = async (e, clienteId) => {
                 {seccion === 'Inicio' ? 'Panel de control' : seccion}
               </h1>
 
-              <p className="subtitle">
-                {seccion === 'Inicio'
-                  ? 'Gestioná tus motos, clientes, alquileres y pagos desde un solo lugar.'
-                  : `Desde aquí podrás gestionar ${seccion.toLowerCase()} de MotoRent.`}
-              </p>
             </div>
 
             <div className="date-chip">
@@ -705,8 +736,8 @@ const crearAccesoCliente = async (e, clienteId) => {
                       <Bike size={21} />
                     </div>
                   </div>
-                  <strong>—</strong>
-                  <small>Conectaremos este dato con la API</small>
+                  <strong>a{resumen.motos ?? '—'}</strong>
+                  
                 </article>
 
                 <article className="stat-card">
@@ -716,8 +747,8 @@ const crearAccesoCliente = async (e, clienteId) => {
                       <Users size={21} />
                     </div>
                   </div>
-                  <strong>—</strong>
-                  <small>Conectaremos este dato con la API</small>
+                  <strong>{resumen.clientes ?? '—'}</strong>
+                 
                 </article>
 
                 <article className="stat-card">
@@ -727,8 +758,8 @@ const crearAccesoCliente = async (e, clienteId) => {
                       <ClipboardList size={21} />
                     </div>
                   </div>
-                  <strong>—</strong>
-                  <small>Conectaremos este dato con la API</small>
+                  <strong>{resumen.alquileresActivos ?? '—'}</strong>
+                 
                 </article>
 
                 <article className="stat-card">
@@ -738,8 +769,8 @@ const crearAccesoCliente = async (e, clienteId) => {
                       <CircleDollarSign size={21} />
                     </div>
                   </div>
-                  <strong>—</strong>
-                  <small>Conectaremos este dato con la API</small>
+                  <strong>{resumen.pagos ?? '—'}</strong>
+                  
                 </article>
               </div>
 
@@ -750,7 +781,7 @@ const crearAccesoCliente = async (e, clienteId) => {
                   </div>
 
                   <p className="eyebrow">BIENVENIDO A MOTORENT</p>
-                  <h2>Tu negocio, más organizado.</h2>
+                  <h2>Tu negocio, más organizado</h2>
 
                   <p>
                     Administrá la disponibilidad de las motos, los datos

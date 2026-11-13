@@ -181,33 +181,81 @@ html { scroll-behavior: smooth; }
 
 .hero-image {
   position: relative;
-  width: 40%;
-  max-width: 460px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8dbaff;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 45%, rgba(21, 101, 224, 0.35), rgba(21, 101, 224, 0.05) 65%);
-  border: 1px solid rgba(127, 176, 255, 0.2);
+  width: 44%;
+  max-width: 520px;
+  aspect-ratio: 1.15 / 1;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  background: #0b1f3a;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  isolation: isolate;
 }
 
-.hero-image::before,
 .hero-image::after {
   content: "";
   position: absolute;
-  border-radius: 50%;
-  border: 1px dashed rgba(127, 176, 255, 0.22);
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 22, 41, 0.02) 25%, rgba(8, 22, 41, 0.9) 100%);
+  pointer-events: none;
 }
 
-.hero-image::before { inset: 12%; }
-.hero-image::after { inset: -8%; border-style: solid; border-color: rgba(127, 176, 255, 0.08); }
+.hero-motorcycle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
-.hero-image svg {
-  width: 62%;
-  height: auto;
-  filter: drop-shadow(0 20px 40px rgba(21, 101, 224, 0.5));
+.hero-ad-copy {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  color: white;
+}
+
+.hero-ad-eyebrow {
+  color: #b9d4ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.hero-ad-copy p {
+  margin: 8px 0 16px;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero-apps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.hero-app-logo {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero-app-pedidosya {
+  color: #e83a4b;
+}
+
+.hero-app-uber strong {
+  color: #111827;
 }
 
 /* ---------- Beneficios ---------- */
@@ -504,7 +552,7 @@ html { scroll-behavior: smooth; }
   .hero-content p { margin: 0 auto; }
 
   .hero-image {
-    width: 70%;
+    width: min(100%, 520px);
   }
 
   .home-benefits { margin: -50px 16px 0; }

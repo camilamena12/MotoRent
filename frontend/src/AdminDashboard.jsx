@@ -742,7 +742,7 @@ useEffect(() => {
                       <Bike size={21} />
                     </div>
                   </div>
-                  <strong>a{resumen.motos ?? '—'}</strong>
+                  <strong>{resumen.motos ?? '—'}</strong>
                   
                 </article>
 

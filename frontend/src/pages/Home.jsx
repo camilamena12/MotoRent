@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bike, ShieldCheck, Clock, ArrowRight } from 'lucide-react';
+import { Bike, ShieldCheck, Clock, ArrowRight, Wrench } from 'lucide-react';
 import './Home.css';
 import { useEffect, useState } from 'react';
 import api from '../services/api';
@@ -96,9 +96,10 @@ useEffect(() => {
         </article>
 
         <article>
-          <ShieldCheck size={28} />
-          <h3>Alquiler organizado</h3>
-          <p>Condiciones claras desde el comienzo.</p>
+          <Wrench size={28} />
+          <h3>Service incluido</h3>
+          <p>El mantenimiento corre por nuestra cuenta.
+  ¡El día de service no pagás alquiler!</p>
         </article>
 
         <article>
@@ -106,6 +107,8 @@ useEffect(() => {
           <h3>Opción de compra</h3>
           <p>Posibilidad de adquirir tu moto según las condiciones del contrato.</p>
         </article>
+      
+      
       </section>
 
       {/* Catálogo */}

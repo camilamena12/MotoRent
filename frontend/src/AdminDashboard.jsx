@@ -35,6 +35,12 @@ function App() {
   const [seccion, setSeccion] = useState('Inicio');
   const [menuAbierto, setMenuAbierto] = useState(true);
 
+const [resumen, setResumen] = useState({
+  motos: null,
+  clientes: null,
+  alquileresActivos: null,
+  pagos: null,
+});
   // Estados de las motos
   const [motos, setMotos] = useState([]);
   const [cargandoMotos, setCargandoMotos] = useState(false);

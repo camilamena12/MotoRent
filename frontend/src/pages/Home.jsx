@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bike, ShieldCheck, Clock, ArrowRight, Wrench } from 'lucide-react';
+import { Bike, Motorbike, ShieldCheck, Clock, ArrowRight, Wrench } from 'lucide-react';
 import './Home.css';
 import { useEffect, useState } from 'react';
 import api from '../services/api';
@@ -123,35 +123,57 @@ useEffect(() => {
   <p>{error}</p>
 ) : motos.length === 0 ? (
   <div className="catalog-placeholder">
-    <Bike size={48} />
+    <Motorbike size={46} strokeWidth={1.7} />
     <h3>Próximamente, nuevas motos</h3>
     <p>En este momento no hay motos disponibles para alquilar.</p>
   </div>
 ) : (
-  <div className="row g-4 mt-3">
+  <div className="row g-3 mt-3">
     {motos.map((moto) => (
-      <div className="col-md-4" key={moto.id}>
-        <div className="card h-100 shadow-sm">
-          <div className="card-body">
-            <Bike size={40} className="text-danger mb-3" />
-            <h3 className="card-title">
+     <div className="col-sm-6 col-lg-3" key={moto.id}>
+
+        <article className="moto-catalogo-card">
+
+          
+            <div className="moto-catalogo-imagen">
+  <Motorbike size={32} strokeWidth={1.6} />
+
+  <span className="badge bg-success moto-badge-disponible">
+    Disponible
+  </span>
+</div>
+
+          <div className="moto-catalogo-contenido">
+
+            <h3>
               {moto.marca} {moto.modelo}
             </h3>
-            <p>{moto.cilindrada} cc</p>
-            <h5>
-              ${Number(moto.precioPorDia).toLocaleString('es-AR')} por día
-            </h5>
-            <span className="badge bg-success">Disponible</span>
-            <Link to="/solicitar-alquiler" state={{ moto }} className="btn btn-danger w-100 mt-3">
-              Solicitar alquiler</Link>
-        
+
+            <p className="moto-catalogo-cilindrada">
+              {moto.cilindrada} cc
+            </p>
+
+            <p className="moto-catalogo-precio">
+              ${Number(moto.precioPorDia).toLocaleString('es-AR')}
+              <span> por día</span>
+            </p>
+
+            <Link
+              to="/solicitar-alquiler"
+              state={{ moto }}
+              className="moto-catalogo-boton"
+            >
+              Solicitar alquiler
+            </Link>
+
           </div>
-        </div>
+        </article>
+
       </div>
     ))}
   </div>
 )}
-      </section>
+</section>
 
       {/* Requisitos */}
       <section className="home-requirements" id="requisitos">

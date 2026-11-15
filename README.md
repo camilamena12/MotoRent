@@ -58,10 +58,9 @@ MotoRent/
 ```
 ---
 🔐 Roles y acceso
-Rol	Cómo se obtiene	Accede a
-Administrador	Se crea automáticamente al iniciar el backend en desarrollo	`/admin`
-Cliente	El administrador le crea la cuenta cuando ya tiene un alquiler registrado	`/cliente`
-El login (`/login`) devuelve un token JWT que el frontend guarda en `sessionStorage` y envía en cada petición a la API.
+Administrador:Se crea automáticamente al iniciar el backend en desarrollo	`/admin`
+Cliente	:El administrador le crea la cuenta cuando ya tiene un alquiler registrado	`/cliente`
+El login : (`/login`) devuelve un token JWT que el frontend guarda en `sessionStorage` y envía en cada petición a la API.
 ---
 🔌 Endpoints principales
 Recurso	Ruta base	Acceso
